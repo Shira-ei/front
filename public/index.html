@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="pagina">
+    <header class="encabezado">
+      <div>
+        <h1>Clientes</h1>
+        <p class="resumen" id="resumen" aria-live="polite">Cargando…</p>
+      </div>
+      <button type="button" class="boton boton-primario" id="btn-nuevo">Nuevo cliente</button>
+    </header>
+
+    <section class="panel" aria-labelledby="titulo-tabla">
+      <h2 id="titulo-tabla" class="solo-lectores">Listado de clientes</h2>
+      <div class="tabla-scroll">
+        <table class="tabla" id="tabla">
+          <thead>
+            <tr>
+              <th scope="col" class="col-num">N.º</th>
+              <th scope="col">Nombre</th>
+              <th scope="col" class="col-correo">Correo</th>
+              <th scope="col" class="col-secundaria">Teléfono</th>
+              <th scope="col" class="col-secundaria">Ciudad</th>
+              <th scope="col" class="col-secundaria">Registrado</th>
+              <th scope="col" class="col-acciones"><span class="solo-lectores">Acciones</span></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="estado" id="estado" hidden></div>
+    </section>
+  </main>
+
+  <dialog class="modal" id="modal" aria-labelledby="modal-titulo">
+    <form id="form" novalidate>
+      <header class="modal-cabecera">
+        <h2 id="modal-titulo">Nuevo cliente</h2>
+        <button type="button" class="cerrar" id="btn-cerrar" aria-label="Cerrar">&times;</button>
+      </header>
+
+      <div class="modal-cuerpo">
+        <p class="error-general" id="error-general" role="alert" hidden></p>
+
+        <div class="campo">
+          <label for="nombre">Nombre completo</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="off" maxlength="100" required aria-describedby="err-nombre">
+          <p class="error-campo" id="err-nombre" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" autocomplete="off" maxlength="150" required aria-describedby="err-email">
+          <p class="error-campo" id="err-email" aria-live="polite"></p>
+        </div>
+
+        <div class="fila-campos">
+          <div class="campo">
+            <label for="telefono">Teléfono <span class="opcional">(opcional)</span></label>
+            <input id="telefono" name="telefono" type="tel" autocomplete="off" maxlength="20" aria-describedby="err-telefono">
+            <p class="error-campo" id="err-telefono" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="ciudad">Ciudad <span class="opcional">(opcional)</span></label>
+            <input id="ciudad" name="ciudad" type="text" autocomplete="off" maxlength="80" aria-describedby="err-ciudad">
+            <p class="error-campo" id="err-ciudad" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="modal-pie">
+        <button type="button" class="boton boton-secundario" id="btn-cancelar">Cancelar</button>
+        <button type="submit" class="boton boton-primario" id="btn-guardar">Guardar cliente</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="modal modal-confirmar" id="modal-eliminar" aria-labelledby="eliminar-titulo" aria-describedby="eliminar-texto">
+    <header class="modal-cabecera">
+      <h2 id="eliminar-titulo">Eliminar cliente</h2>
+    </header>
+    <div class="modal-cuerpo">
+      <p class="eliminar-texto" id="eliminar-texto"></p>
+      <p class="error-general" id="error-eliminar" role="alert" hidden></p>
+    </div>
+    <footer class="modal-pie">
+      <button type="button" class="boton boton-secundario" id="btn-eliminar-cancelar" autofocus>Cancelar</button>
+      <button type="button" class="boton boton-peligro" id="btn-eliminar-confirmar">Eliminar</button>
+    </footer>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
